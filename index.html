@@ -6,9 +6,8 @@
     <title>GemmaAsisten - AI untuk Kehidupan, Kerja, Belajar & Sehat</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* === RESET & BASE === */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
         :root {
             --biru-tua: #0f172a;
             --biru-card: #1e293b;
@@ -32,7 +31,6 @@
             overflow-x: hidden;
         }
 
-        /* === NAVBAR === */
         .navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
@@ -116,7 +114,6 @@
             border-color: var(--accent);
         }
 
-        /* === HERO === */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -226,7 +223,6 @@
             color: var(--accent);
         }
 
-        /* === SECTIONS === */
         .section {
             padding: 5rem 2rem;
             max-width: 1200px;
@@ -264,7 +260,6 @@
             margin: 0 auto;
         }
 
-        /* === KATEGORI CARDS === */
         .kategori-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -342,7 +337,6 @@
             font-weight: 700;
         }
 
-        /* === CHAT INTERFACE === */
         .chat-section {
             background: linear-gradient(180deg, var(--biru-tua) 0%, rgba(30, 41, 59, 0.5) 50%, var(--biru-tua) 100%);
             padding: 5rem 2rem;
@@ -534,7 +528,6 @@
             cursor: not-allowed;
         }
 
-        /* === MODAL SETTING === */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -653,7 +646,6 @@
             color: var(--merah);
         }
 
-        /* === ALUR KERJA === */
         .alur-section {
             background: linear-gradient(180deg, var(--biru-tua) 0%, rgba(30, 41, 59, 0.3) 50%, var(--biru-tua) 100%);
         }
@@ -706,7 +698,6 @@
             margin: -0.25rem 0;
         }
 
-        /* === FOOTER === */
         .footer {
             text-align: center;
             padding: 3rem 2rem;
@@ -720,7 +711,6 @@
             text-decoration: none;
         }
 
-        /* === RESPONSIVE === */
         @media (max-width: 768px) {
             .nav-links { display: none; }
             .hero h1 { font-size: 2rem; }
@@ -728,13 +718,11 @@
             .alur-step { flex-direction: column; text-align: center; }
         }
 
-        /* === SCROLLBAR === */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--biru-tua); }
         ::-webkit-scrollbar-thumb { background: var(--biru-muda); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-        /* === REVEAL ANIMATION === */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -749,7 +737,6 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <a href="#" class="logo">
             <div class="logo-icon">🧠</div>
@@ -764,7 +751,6 @@
         <button class="btn-setting" onclick="bukaModal()">⚙️ API Key</button>
     </nav>
 
-    <!-- HERO -->
     <section class="hero" id="home">
         <div class="hero-content">
             <div class="badge-hackathon">
@@ -772,7 +758,7 @@
             </div>
             <h1>
                 Asisten AI untuk<br>
-                <span>Kehidupan, Pekerjaan,<br>Pendidikan & Kesehatan</span>
+                <span>Kehidupan, Pekerjaan,<br>Belajar & Sehat</span>
             </h1>
             <p>
                 Powered by Gemma 4 — model AI open-weight canggih dari Google. 
@@ -790,7 +776,6 @@
         </div>
     </section>
 
-    <!-- FITUR -->
     <section class="section" id="fitur">
         <div class="section-header reveal">
             <div class="section-label">4 Kategori Utama</div>
@@ -844,7 +829,6 @@
         </div>
     </section>
 
-    <!-- CHAT DEMO -->
     <section class="chat-section" id="chat">
         <div class="section-header reveal">
             <div class="section-label">Live Demo</div>
@@ -882,7 +866,6 @@
         </div>
     </section>
 
-    <!-- ALUR KERJA -->
     <section class="section alur-section" id="alur">
         <div class="section-header reveal">
             <div class="section-label">Alur Kerja</div>
@@ -926,7 +909,6 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer class="footer">
         <p>
             <strong style="color: var(--text); font-size: 1.2rem;">🧠 GemmaAsisten</strong><br><br>
@@ -942,17 +924,16 @@
         </p>
     </footer>
 
-    <!-- MODAL SETTING -->
     <div class="modal-overlay" id="modal-setting">
         <div class="modal">
             <h3>⚙️ Pengaturan API</h3>
             <p>Masukkan API Key Gemini Anda untuk mengaktifkan chat AI. API Key bisa didapat gratis dari Google AI Studio.</p>
-            
+
             <div class="input-group">
                 <label>Gemini API Key</label>
                 <input type="password" id="input-apikey" placeholder="AIzaSy...">
             </div>
-            
+
             <div class="input-group">
                 <label>Model Gemma/Gemini</label>
                 <select id="select-model">
@@ -985,14 +966,12 @@
     </div>
 
     <script>
-        // === KONFIGURASI ===
         var apiKey = localStorage.getItem('gemma_api_key') || '';
         var modelTerpilih = localStorage.getItem('gemma_model') || 'gemini-2.0-flash';
         var kategoriAktif = localStorage.getItem('gemma_kategori') || 'umum';
         var sedangMerekam = false;
         var recognition = null;
 
-        // Inisialisasi speech recognition kalau browser support
         if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
             var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             recognition = new SpeechRecognition();
@@ -1005,7 +984,6 @@
                 document.getElementById('input-pesan').value = transcript;
                 sedangMerekam = false;
                 updateMicButton();
-                // Auto kirim setelah 0.5 detik
                 setTimeout(kirimPesan, 500);
             };
 
@@ -1022,20 +1000,16 @@
             };
         }
 
-        // === INIT ===
         document.addEventListener('DOMContentLoaded', function() {
-            // Load setting dari localStorage
             if (apiKey) {
                 document.getElementById('input-apikey').value = apiKey;
                 updateApiStatus(true);
             }
             document.getElementById('select-model').value = modelTerpilih;
             document.getElementById('select-kategori').value = kategoriAktif;
-            
-            // Scroll reveal
+
             setupReveal();
-            
-            // Navbar scroll effect
+
             window.addEventListener('scroll', function() {
                 var nav = document.getElementById('navbar');
                 if (window.scrollY > 50) {
@@ -1045,8 +1019,7 @@
                     nav.style.padding = '1rem 2rem';
                     nav.style.boxShadow = 'none';
                 }
-                
-                // Update active nav
+
                 var sections = document.querySelectorAll('section[id]');
                 var scrollY = window.scrollY + 100;
                 sections.forEach(function(section) {
@@ -1065,7 +1038,6 @@
             });
         });
 
-        // === REVEAL ON SCROLL ===
         function setupReveal() {
             var reveals = document.querySelectorAll('.reveal');
             var observer = new IntersectionObserver(function(entries) {
@@ -1075,13 +1047,12 @@
                     }
                 });
             }, { threshold: 0.1 });
-            
+
             reveals.forEach(function(el) {
                 observer.observe(el);
             });
         }
 
-        // === MODAL ===
         function bukaModal() {
             document.getElementById('modal-setting').classList.add('show');
         }
@@ -1095,20 +1066,19 @@
             apiKey = document.getElementById('input-apikey').value.trim();
             modelTerpilih = document.getElementById('select-model').value;
             kategoriAktif = document.getElementById('select-kategori').value;
-            
+
             if (!apiKey) {
                 alert('API Key tidak boleh kosong!');
                 return;
             }
-            
+
             localStorage.setItem('gemma_api_key', apiKey);
             localStorage.setItem('gemma_model', modelTerpilih);
             localStorage.setItem('gemma_kategori', kategoriAktif);
-            
+
             updateApiStatus(true);
             document.getElementById('status-simpan').style.display = 'flex';
-            
-            // Test API dengan delay biar kelihatan real
+
             setTimeout(function() {
                 testApiConnection();
             }, 800);
@@ -1125,11 +1095,10 @@
             }
         }
 
-        // === TEST API ===
         async function testApiConnection() {
             var btnSend = document.getElementById('btn-send');
             btnSend.disabled = true;
-            
+
             try {
                 var response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + modelTerpilih + ':generateContent?key=' + apiKey, {
                     method: 'POST',
@@ -1140,9 +1109,8 @@
                         }]
                     })
                 });
-                
+
                 if (response.ok) {
-                    // Tambah pesan sukses di chat
                     tambahPesanAi('✅ API Key berhasil tersambung! Model <strong>' + modelTerpilih + '</strong> siap digunakan. Silakan tanyakan apa saja.');
                     document.getElementById('model-info').textContent = 'Model: ' + modelTerpilih + ' | Status: Online';
                 } else {
@@ -1158,49 +1126,42 @@
             }
         }
 
-        // === KATEGORI ===
         function pilihKategori(kat) {
             kategoriAktif = kat;
             localStorage.setItem('gemma_kategori', kat);
             document.getElementById('select-kategori').value = kat;
-            
-            // Scroll ke chat
+
             document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });
-            
-            // Tambah pesan context
+
             var namaKat = {
                 'kehidupan': '🏠 Kehidupan',
                 'pekerjaan': '💼 Pekerjaan', 
                 'pendidikan': '📚 Pendidikan',
                 'kesehatan': '🏥 Kesehatan'
             };
-            
+
             tambahPesanAi('Kategori aktif diubah ke <strong>' + namaKat[kat] + '</strong>. Saya akan fokus membantu di bidang ini. Ada yang bisa saya bantu?');
         }
 
-        // === CHAT ===
         async function kirimPesan() {
             var input = document.getElementById('input-pesan');
             var pesan = input.value.trim();
             if (!pesan) return;
-            
+
             if (!apiKey) {
                 alert('Atur API Key dulu di tombol ⚙️ API Key!');
                 bukaModal();
                 return;
             }
-            
-            // Tambah pesan user
+
             tambahPesanUser(pesan);
             input.value = '';
-            
-            // Show typing
+
             var typingId = tambahTyping();
-            
+
             var btnSend = document.getElementById('btn-send');
             btnSend.disabled = true;
-            
-            // Build prompt berdasarkan kategori
+
             var systemPrompt = 'Kamu adalah GemmaAsisten, asisten AI yang membantu di bidang ';
             var kategoriMap = {
                 'umum': 'Kehidupan, Pekerjaan, Pendidikan, dan Kesehatan',
@@ -1210,7 +1171,7 @@
                 'kesehatan': 'Kesehatan (informasi kesehatan, kesejahteraan, rehabilitasi)'
             };
             systemPrompt += kategoriMap[kategoriAktif] + '. Jawab dalam Bahasa Indonesia yang santai tapi informatif.';
-            
+
             try {
                 var response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + modelTerpilih + ':generateContent?key=' + apiKey, {
                     method: 'POST',
@@ -1225,23 +1186,21 @@
                         }
                     })
                 });
-                
-                // Hapus typing
+
                 hapusTyping(typingId);
-                
+
                 if (!response.ok) {
                     var err = await response.json();
                     throw new Error(err.error?.message || 'Error ' + response.status);
                 }
-                
+
                 var data = await response.json();
                 var jawaban = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Maaf, saya tidak mengerti. Coba tanyakan dengan cara lain.';
-                
-                // Format jawaban (convert markdown sederhana ke HTML)
+
                 jawaban = formatMarkdown(jawaban);
-                
+
                 tambahPesanAi(jawaban);
-                
+
             } catch (e) {
                 hapusTyping(typingId);
                 console.log('Chat error:', e);
@@ -1251,7 +1210,6 @@
             }
         }
 
-        // === UI HELPERS ===
         function tambahPesanUser(text) {
             var box = document.getElementById('chat-box');
             var div = document.createElement('div');
@@ -1288,24 +1246,19 @@
         }
 
         function formatMarkdown(text) {
-            // Bold
             text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            // Italic
             text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
-            // Line breaks
             text = text.replace(/\n/g, '<br>');
-            // Bullet points
             text = text.replace(/- (.*?)(<br>|$)/g, '• $1$2');
             return text;
         }
 
-        // === MIC ===
         function toggleMic() {
             if (!recognition) {
                 alert('Browser Anda tidak mendukung voice input. Coba Chrome atau Edge.');
                 return;
             }
-            
+
             if (sedangMerekam) {
                 recognition.stop();
                 sedangMerekam = false;
@@ -1327,25 +1280,20 @@
             }
         }
 
-        // === CLOSE MODAL ON OUTSIDE CLICK ===
         document.getElementById('modal-setting').addEventListener('click', function(e) {
             if (e.target === this) {
                 tutupModal();
             }
         });
 
-        // === ESC KEY ===
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 tutupModal();
             }
         });
 
-        // console log biar kelihatan "human made" wkwk
         console.log('%c GemmaAsisten ', 'background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
         console.log('Build with Gemma AI Hackathon 2026');
-        console.log('TODO: tambahin fitur image upload buat analisis makanan');
-        console.log('TODO: integrasi sama localStorage buat history chat');
     </script>
 </body>
 </html>
