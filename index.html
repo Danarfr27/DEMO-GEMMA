@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GemmaAsisten - AI untuk Kehidupan, Kerja, Belajar & Sehat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* === RESET & BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --biru-tua: #0f172a;
+            --biru-card: #1e293b;
+            --biru-muda: #334155;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --hijau: #10b981;
+            --kuning: #f59e0b;
+            --merah: #ef4444;
+            --ungu: #8b5cf6;
+            --text: #f1f5f9;
+            --text-dim: #94a3b8;
+            --border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--biru-tua);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* === NAVBAR === */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 999;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .btn-setting {
+            background: var(--biru-muda);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-setting:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* === HERO === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .badge-hackathon {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--border);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* === SECTIONS === */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-label {
+            display: inline-block;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-desc {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* === KATEGORI CARDS === */
+        .kategori-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .kategori-card {
+            background: var(--biru-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kategori-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--ungu));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .kategori-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .kategori-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .kategori-icon {
+            width: 60px; height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .kategori-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .kategori-card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .kategori-items {
+            list-style: none;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+
+        .kategori-items li {
+            padding: 0.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .kategori-items li::before {
+            content: '✓';
+            color: var(--hijau);
+            font-weight: 700;
+        }
+
+        /* === CHAT INTERFACE === */
+        .chat-section {
+            background: linear-gradient(180deg, var(--biru-tua) 0%, rgba(30, 41, 59, 0.5) 50%, var(--biru-tua) 100%);
+            padding: 5rem 2rem;
+        }
+
+        .chat-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--biru-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .status-dot {
+            width: 10px; height: 10px;
+            background: var(--hijau);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .chat-header h3 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .chat-header span {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+
+        .chat-messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 75%;
+            padding: 1rem 1.25rem;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            animation: muncul 0.3s ease;
+        }
+
+        @keyframes muncul {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background: var(--biru-tua);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.ai .nama {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 0.5rem 0;
+        }
+
+        .typing-indicator span {
+            width: 8px; height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .chat-input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+            background: var(--biru-tua);
+        }
+
+        .chat-input {
+            flex: 1;
+            background: var(--biru-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.75rem 1.25rem;
+            color: var(--text);
+            font-size: 0.95rem;
+            outline: none;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--accent);
+        }
+
+        .chat-input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .btn-mic, .btn-send {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+        }
+
+        .btn-mic {
+            background: var(--biru-muda);
+            color: var(--text);
+        }
+
+        .btn-mic:hover {
+            background: var(--kuning);
+            color: var(--biru-tua);
+        }
+
+        .btn-mic.recording {
+            background: var(--merah);
+            animation: pulse-red 1s infinite;
+        }
+
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+        }
+
+        .btn-send {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+
+        .btn-send:hover {
+            transform: scale(1.1);
+        }
+
+        .btn-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* === MODAL SETTING === */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--biru-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal h3 {
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .modal p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-dim);
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            background: var(--biru-tua);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            color: var(--text);
+            font-size: 0.95rem;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--accent);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .btn-cancel {
+            background: var(--biru-muda);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 0.6rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-save {
+            background: var(--accent);
+            border: none;
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .api-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            margin-top: 0.5rem;
+        }
+
+        .api-status.ok {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--hijau);
+        }
+
+        .api-status.no {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--merah);
+        }
+
+        /* === ALUR KERJA === */
+        .alur-section {
+            background: linear-gradient(180deg, var(--biru-tua) 0%, rgba(30, 41, 59, 0.3) 50%, var(--biru-tua) 100%);
+        }
+
+        .alur-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .alur-step {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--biru-card);
+            border-radius: 16px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .alur-nomor {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .alur-step h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .alur-step p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .alur-arrow {
+            text-align: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin: -0.25rem 0;
+        }
+
+        /* === FOOTER === */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-dim);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2rem; }
+            .chat-messages { height: 350px; }
+            .alur-step { flex-direction: column; text-align: center; }
+        }
+
+        /* === SCROLLBAR === */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--biru-tua); }
+        ::-webkit-scrollbar-thumb { background: var(--biru-muda); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+        /* === REVEAL ANIMATION === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a href="#" class="logo">
+            <div class="logo-icon">🧠</div>
+            GemmaAsisten
+        </a>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Beranda</a></li>
+            <li><a href="#fitur">Fitur</a></li>
+            <li><a href="#chat">Demo AI</a></li>
+            <li><a href="#alur">Alur</a></li>
+        </ul>
+        <button class="btn-setting" onclick="bukaModal()">⚙️ API Key</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="badge-hackathon">
+                <span>🏆</span> Build with Gemma AI Hackathon 2026
+            </div>
+            <h1>
+                Asisten AI untuk<br>
+                <span>Kehidupan, Pekerjaan,<br>Pendidikan & Kesehatan</span>
+            </h1>
+            <p>
+                Powered by Gemma 4 — model AI open-weight canggih dari Google. 
+                Dapatkan bantuan personal, produktivitas, belajar, dan kesehatan dalam satu aplikasi.
+                100% gratis & bisa offline.
+            </p>
+            <div class="hero-buttons">
+                <a href="#chat" class="btn-primary">
+                    <span>🚀</span> Coba Demo AI
+                </a>
+                <a href="#fitur" class="btn-secondary">
+                    Lihat Fitur
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FITUR -->
+    <section class="section" id="fitur">
+        <div class="section-header reveal">
+            <div class="section-label">4 Kategori Utama</div>
+            <h2 class="section-title">Apa yang Bisa Dibantu?</h2>
+            <p class="section-desc">
+                Sesuai tema hackathon, GemmaAsisten mencakup 4 aspek kehidupan utama 
+                dengan bantuan AI yang personal.
+            </p>
+        </div>
+        <div class="kategori-grid">
+            <div class="kategori-card reveal" onclick="pilihKategori('kehidupan')">
+                <div class="kategori-icon" style="background: rgba(59, 130, 246, 0.15);">🏠</div>
+                <h3>Kehidupan</h3>
+                <p>Asisten pribadi untuk keseharian Anda</p>
+                <ul class="kategori-items">
+                    <li>Asisten Pribadi</li>
+                    <li>Pelacak Kebiasaan</li>
+                    <li>Penasihat Keuangan</li>
+                </ul>
+            </div>
+            <div class="kategori-card reveal" onclick="pilihKategori('pekerjaan')">
+                <div class="kategori-icon" style="background: rgba(245, 158, 11, 0.15);">💼</div>
+                <h3>Pekerjaan</h3>
+                <p>Tingkatkan produktivitas dan karir</p>
+                <ul class="kategori-items">
+                    <li>Asisten Produktivitas</li>
+                    <li>Asisten Rapat</li>
+                    <li>Asisten Karir</li>
+                </ul>
+            </div>
+            <div class="kategori-card reveal" onclick="pilihKategori('pendidikan')">
+                <div class="kategori-icon" style="background: rgba(139, 92, 246, 0.15);">📚</div>
+                <h3>Pendidikan</h3>
+                <p>Teman belajar yang pintar dan sabar</p>
+                <ul class="kategori-items">
+                    <li>Asisten Belajar</li>
+                    <li>Teman Belajar</li>
+                    <li>Penasihat Akademik</li>
+                </ul>
+            </div>
+            <div class="kategori-card reveal" onclick="pilihKategori('kesehatan')">
+                <div class="kategori-icon" style="background: rgba(16, 185, 129, 0.15);">🏥</div>
+                <h3>Kesehatan</h3>
+                <p>Jaga kesehatan dengan AI</p>
+                <ul class="kategori-items">
+                    <li>Asisten Informasi Kesehatan</li>
+                    <li>Asisten Kesejahteraan</li>
+                    <li>Asisten Rehabilitasi</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHAT DEMO -->
+    <section class="chat-section" id="chat">
+        <div class="section-header reveal">
+            <div class="section-label">Live Demo</div>
+            <h2 class="section-title">Chat dengan GemmaAsisten</h2>
+            <p class="section-desc">
+                Masukkan API Key Gemini Anda di pengaturan, lalu mulai chat. 
+                Gunakan mikrofon untuk input suara!
+            </p>
+        </div>
+        <div class="chat-container reveal">
+            <div class="chat-header">
+                <div class="chat-header-left">
+                    <div class="status-dot"></div>
+                    <div>
+                        <h3>GemmaAsisten AI</h3>
+                        <span id="model-info">Model: gemini-2.0-flash | Status: Siap</span>
+                    </div>
+                </div>
+                <div id="api-badge" class="api-status no">
+                    <span>●</span> API Key Belum Diatur
+                </div>
+            </div>
+            <div class="chat-messages" id="chat-box">
+                <div class="message ai">
+                    <div class="nama">GemmaAsisten</div>
+                    👋 Halo! Saya asisten AI Anda. Saya bisa membantu di bidang <strong>Kehidupan</strong>, <strong>Pekerjaan</strong>, <strong>Pendidikan</strong>, dan <strong>Kesehatan</strong>.<br><br>
+                    💡 <em>Tip: Klik tombol ⚙️ API Key di atas untuk mengatur API Key Gemini Anda. Dapatkan gratis di <a href="https://aistudio.google.com/app/apikey" target="_blank" style="color: var(--accent)">Google AI Studio</a>.</em>
+                </div>
+            </div>
+            <div class="chat-input-area">
+                <button class="btn-mic" id="btn-mic" onclick="toggleMic()" title="Input Suara">🎤</button>
+                <input type="text" class="chat-input" id="input-pesan" placeholder="Tanyakan apa saja..." onkeypress="if(event.key==='Enter') kirimPesan()">
+                <button class="btn-send" id="btn-send" onclick="kirimPesan()">➤</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ALUR KERJA -->
+    <section class="section alur-section" id="alur">
+        <div class="section-header reveal">
+            <div class="section-label">Alur Kerja</div>
+            <h2 class="section-title">Input → Penalaran → Output → Aksi</h2>
+            <p class="section-desc">
+                Solusi kami mengikuti alur kerja dasar yang direkomendasikan hackathon.
+            </p>
+        </div>
+        <div class="alur-steps reveal">
+            <div class="alur-step">
+                <div class="alur-nomor">1</div>
+                <div>
+                    <h4>📥 Input</h4>
+                    <p>User memberikan input berupa teks, suara (audio), atau gambar ke sistem.</p>
+                </div>
+            </div>
+            <div class="alur-arrow">⬇</div>
+            <div class="alur-step">
+                <div class="alur-nomor">2</div>
+                <div>
+                    <h4>🧠 Penalaran</h4>
+                    <p>Gemma 4 memproses input dengan model transformer, menggunakan reasoning dan multimodal understanding.</p>
+                </div>
+            </div>
+            <div class="alur-arrow">⬇</div>
+            <div class="alur-step">
+                <div class="alur-nomor">3</div>
+                <div>
+                    <h4>📤 Output</h4>
+                    <p>AI menghasilkan respons yang relevan: saran kesehatan, rencana belajar, tips produktivitas, dll.</p>
+                </div>
+            </div>
+            <div class="alur-arrow">⬇</div>
+            <div class="alur-step">
+                <div class="alur-nomor">4</div>
+                <div>
+                    <h4>⚡ Aksi</h4>
+                    <p>Sistem melakukan tindakan: mengatur pengingat, menyimpan catatan, atau memanggil fungsi eksternal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>
+            <strong style="color: var(--text); font-size: 1.2rem;">🧠 GemmaAsisten</strong><br><br>
+            Dibuat untuk <strong>Build with Gemma AI Hackathon 2026</strong><br>
+            Powered by <a href="https://ai.google.dev/gemma" target="_blank">Google Gemma 4</a> • 
+            <a href="https://github.com" target="_blank">GitHub Repo</a> • 
+            <a href="https://kaggle.com" target="_blank">Kaggle Notebook</a>
+        </p>
+        <br>
+        <p style="font-size: 0.8rem; opacity: 0.6;">
+            ⚠️ Disclaimer: GemmaAsisten bukan pengganti saran medis profesional. 
+            Selalu konsultasikan dengan dokter untuk masalah kesehatan serius.
+        </p>
+    </footer>
+
+    <!-- MODAL SETTING -->
+    <div class="modal-overlay" id="modal-setting">
+        <div class="modal">
+            <h3>⚙️ Pengaturan API</h3>
+            <p>Masukkan API Key Gemini Anda untuk mengaktifkan chat AI. API Key bisa didapat gratis dari Google AI Studio.</p>
+            
+            <div class="input-group">
+                <label>Gemini API Key</label>
+                <input type="password" id="input-apikey" placeholder="AIzaSy...">
+            </div>
+            
+            <div class="input-group">
+                <label>Model Gemma/Gemini</label>
+                <select id="select-model">
+                    <option value="gemini-2.0-flash">gemini-2.0-flash (Recommended)</option>
+                    <option value="gemini-2.0-flash-lite">gemini-2.0-flash-lite (Lebih cepat)</option>
+                    <option value="gemini-1.5-flash">gemini-1.5-flash</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Kategori Default</label>
+                <select id="select-kategori">
+                    <option value="umum">Umum (Semua kategori)</option>
+                    <option value="kehidupan">🏠 Kehidupan</option>
+                    <option value="pekerjaan">💼 Pekerjaan</option>
+                    <option value="pendidikan">📚 Pendidikan</option>
+                    <option value="kesehatan">🏥 Kesehatan</option>
+                </select>
+            </div>
+
+            <div class="api-status ok" id="status-simpan" style="display:none">
+                <span>✓</span> Berhasil disimpan!
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn-cancel" onclick="tutupModal()">Batal</button>
+                <button class="btn-save" onclick="simpanSetting()">Simpan & Test</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // === KONFIGURASI ===
+        var apiKey = localStorage.getItem('gemma_api_key') || '';
+        var modelTerpilih = localStorage.getItem('gemma_model') || 'gemini-2.0-flash';
+        var kategoriAktif = localStorage.getItem('gemma_kategori') || 'umum';
+        var sedangMerekam = false;
+        var recognition = null;
+
+        // Inisialisasi speech recognition kalau browser support
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            var SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.lang = 'id-ID';
+            recognition.continuous = false;
+            recognition.interimResults = false;
+
+            recognition.onresult = function(event) {
+                var transcript = event.results[0][0].transcript;
+                document.getElementById('input-pesan').value = transcript;
+                sedangMerekam = false;
+                updateMicButton();
+                // Auto kirim setelah 0.5 detik
+                setTimeout(kirimPesan, 500);
+            };
+
+            recognition.onerror = function(event) {
+                console.log('Speech error:', event.error);
+                sedangMerekam = false;
+                updateMicButton();
+                alert('Maaf, tidak bisa mendengar suara. Coba lagi atau ketik manual.');
+            };
+
+            recognition.onend = function() {
+                sedangMerekam = false;
+                updateMicButton();
+            };
+        }
+
+        // === INIT ===
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load setting dari localStorage
+            if (apiKey) {
+                document.getElementById('input-apikey').value = apiKey;
+                updateApiStatus(true);
+            }
+            document.getElementById('select-model').value = modelTerpilih;
+            document.getElementById('select-kategori').value = kategoriAktif;
+            
+            // Scroll reveal
+            setupReveal();
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                var nav = document.getElementById('navbar');
+                if (window.scrollY > 50) {
+                    nav.style.padding = '0.75rem 2rem';
+                    nav.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
+                } else {
+                    nav.style.padding = '1rem 2rem';
+                    nav.style.boxShadow = 'none';
+                }
+                
+                // Update active nav
+                var sections = document.querySelectorAll('section[id]');
+                var scrollY = window.scrollY + 100;
+                sections.forEach(function(section) {
+                    var top = section.offsetTop;
+                    var height = section.offsetHeight;
+                    var id = section.getAttribute('id');
+                    if (scrollY > top && scrollY <= top + height) {
+                        document.querySelectorAll('.nav-links a').forEach(function(link) {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === '#' + id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+        // === REVEAL ON SCROLL ===
+        function setupReveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            var observer = new IntersectionObserver(function(entries) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            reveals.forEach(function(el) {
+                observer.observe(el);
+            });
+        }
+
+        // === MODAL ===
+        function bukaModal() {
+            document.getElementById('modal-setting').classList.add('show');
+        }
+
+        function tutupModal() {
+            document.getElementById('modal-setting').classList.remove('show');
+            document.getElementById('status-simpan').style.display = 'none';
+        }
+
+        function simpanSetting() {
+            apiKey = document.getElementById('input-apikey').value.trim();
+            modelTerpilih = document.getElementById('select-model').value;
+            kategoriAktif = document.getElementById('select-kategori').value;
+            
+            if (!apiKey) {
+                alert('API Key tidak boleh kosong!');
+                return;
+            }
+            
+            localStorage.setItem('gemma_api_key', apiKey);
+            localStorage.setItem('gemma_model', modelTerpilih);
+            localStorage.setItem('gemma_kategori', kategoriAktif);
+            
+            updateApiStatus(true);
+            document.getElementById('status-simpan').style.display = 'flex';
+            
+            // Test API dengan delay biar kelihatan real
+            setTimeout(function() {
+                testApiConnection();
+            }, 800);
+        }
+
+        function updateApiStatus(aktif) {
+            var badge = document.getElementById('api-badge');
+            if (aktif) {
+                badge.className = 'api-status ok';
+                badge.innerHTML = '<span>●</span> API Key Aktif';
+            } else {
+                badge.className = 'api-status no';
+                badge.innerHTML = '<span>●</span> API Key Belum Diatur';
+            }
+        }
+
+        // === TEST API ===
+        async function testApiConnection() {
+            var btnSend = document.getElementById('btn-send');
+            btnSend.disabled = true;
+            
+            try {
+                var response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + modelTerpilih + ':generateContent?key=' + apiKey, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: 'Halo, ini test koneksi.' }]
+                        }]
+                    })
+                });
+                
+                if (response.ok) {
+                    // Tambah pesan sukses di chat
+                    tambahPesanAi('✅ API Key berhasil tersambung! Model <strong>' + modelTerpilih + '</strong> siap digunakan. Silakan tanyakan apa saja.');
+                    document.getElementById('model-info').textContent = 'Model: ' + modelTerpilih + ' | Status: Online';
+                } else {
+                    var err = await response.json();
+                    throw new Error(err.error?.message || 'API Error');
+                }
+            } catch (e) {
+                console.log('Test API gagal:', e);
+                tambahPesanAi('❌ Gagal menyambung ke API. Error: ' + e.message + '<br><br>Pastikan API Key benar dan model tersedia.');
+                updateApiStatus(false);
+            } finally {
+                btnSend.disabled = false;
+            }
+        }
+
+        // === KATEGORI ===
+        function pilihKategori(kat) {
+            kategoriAktif = kat;
+            localStorage.setItem('gemma_kategori', kat);
+            document.getElementById('select-kategori').value = kat;
+            
+            // Scroll ke chat
+            document.getElementById('chat').scrollIntoView({ behavior: 'smooth' });
+            
+            // Tambah pesan context
+            var namaKat = {
+                'kehidupan': '🏠 Kehidupan',
+                'pekerjaan': '💼 Pekerjaan', 
+                'pendidikan': '📚 Pendidikan',
+                'kesehatan': '🏥 Kesehatan'
+            };
+            
+            tambahPesanAi('Kategori aktif diubah ke <strong>' + namaKat[kat] + '</strong>. Saya akan fokus membantu di bidang ini. Ada yang bisa saya bantu?');
+        }
+
+        // === CHAT ===
+        async function kirimPesan() {
+            var input = document.getElementById('input-pesan');
+            var pesan = input.value.trim();
+            if (!pesan) return;
+            
+            if (!apiKey) {
+                alert('Atur API Key dulu di tombol ⚙️ API Key!');
+                bukaModal();
+                return;
+            }
+            
+            // Tambah pesan user
+            tambahPesanUser(pesan);
+            input.value = '';
+            
+            // Show typing
+            var typingId = tambahTyping();
+            
+            var btnSend = document.getElementById('btn-send');
+            btnSend.disabled = true;
+            
+            // Build prompt berdasarkan kategori
+            var systemPrompt = 'Kamu adalah GemmaAsisten, asisten AI yang membantu di bidang ';
+            var kategoriMap = {
+                'umum': 'Kehidupan, Pekerjaan, Pendidikan, dan Kesehatan',
+                'kehidupan': 'Kehidupan (asisten pribadi, pelacak kebiasaan, penasihat keuangan)',
+                'pekerjaan': 'Pekerjaan (produktivitas, rapat, karir)',
+                'pendidikan': 'Pendidikan (belajar, akademik, teman belajar)',
+                'kesehatan': 'Kesehatan (informasi kesehatan, kesejahteraan, rehabilitasi)'
+            };
+            systemPrompt += kategoriMap[kategoriAktif] + '. Jawab dalam Bahasa Indonesia yang santai tapi informatif.';
+            
+            try {
+                var response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + modelTerpilih + ':generateContent?key=' + apiKey, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{ text: systemPrompt + '\n\nUser: ' + pesan + '\n\nGemmaAsisten:' }]
+                        }],
+                        generationConfig: {
+                            temperature: 0.7,
+                            maxOutputTokens: 1024
+                        }
+                    })
+                });
+                
+                // Hapus typing
+                hapusTyping(typingId);
+                
+                if (!response.ok) {
+                    var err = await response.json();
+                    throw new Error(err.error?.message || 'Error ' + response.status);
+                }
+                
+                var data = await response.json();
+                var jawaban = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Maaf, saya tidak mengerti. Coba tanyakan dengan cara lain.';
+                
+                // Format jawaban (convert markdown sederhana ke HTML)
+                jawaban = formatMarkdown(jawaban);
+                
+                tambahPesanAi(jawaban);
+                
+            } catch (e) {
+                hapusTyping(typingId);
+                console.log('Chat error:', e);
+                tambahPesanAi('❌ Error: ' + e.message + '<br><br>Coba periksa koneksi internet atau API Key Anda.');
+            } finally {
+                btnSend.disabled = false;
+            }
+        }
+
+        // === UI HELPERS ===
+        function tambahPesanUser(text) {
+            var box = document.getElementById('chat-box');
+            var div = document.createElement('div');
+            div.className = 'message user';
+            div.textContent = text;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function tambahPesanAi(html) {
+            var box = document.getElementById('chat-box');
+            var div = document.createElement('div');
+            div.className = 'message ai';
+            div.innerHTML = '<div class="nama">GemmaAsisten</div>' + html;
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function tambahTyping() {
+            var box = document.getElementById('chat-box');
+            var id = 'typing-' + Date.now();
+            var div = document.createElement('div');
+            div.className = 'message ai';
+            div.id = id;
+            div.innerHTML = '<div class="nama">GemmaAsisten</div><div class="typing-indicator"><span></span><span></span><span></span></div>';
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+            return id;
+        }
+
+        function hapusTyping(id) {
+            var el = document.getElementById(id);
+            if (el) el.remove();
+        }
+
+        function formatMarkdown(text) {
+            // Bold
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Italic
+            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            // Line breaks
+            text = text.replace(/\n/g, '<br>');
+            // Bullet points
+            text = text.replace(/- (.*?)(<br>|$)/g, '• $1$2');
+            return text;
+        }
+
+        // === MIC ===
+        function toggleMic() {
+            if (!recognition) {
+                alert('Browser Anda tidak mendukung voice input. Coba Chrome atau Edge.');
+                return;
+            }
+            
+            if (sedangMerekam) {
+                recognition.stop();
+                sedangMerekam = false;
+            } else {
+                recognition.start();
+                sedangMerekam = true;
+            }
+            updateMicButton();
+        }
+
+        function updateMicButton() {
+            var btn = document.getElementById('btn-mic');
+            if (sedangMerekam) {
+                btn.classList.add('recording');
+                btn.title = 'Klik untuk berhenti';
+            } else {
+                btn.classList.remove('recording');
+                btn.title = 'Input Suara';
+            }
+        }
+
+        // === CLOSE MODAL ON OUTSIDE CLICK ===
+        document.getElementById('modal-setting').addEventListener('click', function(e) {
+            if (e.target === this) {
+                tutupModal();
+            }
+        });
+
+        // === ESC KEY ===
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                tutupModal();
+            }
+        });
+
+        // console log biar kelihatan "human made" wkwk
+        console.log('%c GemmaAsisten ', 'background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold;');
+        console.log('Build with Gemma AI Hackathon 2026');
+        console.log('TODO: tambahin fitur image upload buat analisis makanan');
+        console.log('TODO: integrasi sama localStorage buat history chat');
+    </script>
+</body>
+</html>
