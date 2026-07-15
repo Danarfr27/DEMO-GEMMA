@@ -1,0 +1,6 @@
+{
+  "name": "Firdhan X Gemma 4",
+  "description": "Asisten pintar premium yang clean dan sangat responsif, mendukung obrolan suara interaktif cerdas offline dan kontrol aksi perangkat instan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
